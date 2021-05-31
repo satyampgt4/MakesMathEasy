@@ -7051,11 +7051,11 @@ function tanglenght() {
 }
 function tangeqution() {
     var a, b, c, d, e, f;
-    g = parseInt(document.getElementById("acenterrp").value);
-    f = parseInt(document.getElementById("bcenterrp").value);
-    c = parseInt(document.getElementById("ccenterrp").value);
-    a = parseInt(document.getElementById("bcenterrpx").value);
-    b = parseInt(document.getElementById("bcenterrpy").value);
+    var g = parseInt(document.getElementById("acenterrp").value);
+    var f = parseInt(document.getElementById("bcenterrp").value);
+    var c = parseInt(document.getElementById("ccenterrp").value);
+    var a = parseInt(document.getElementById("bcenterrpx").value);
+    var b = parseInt(document.getElementById("bcenterrpy").value);
     var x  = g/2;
     var y = f/2;
 
@@ -7070,7 +7070,7 @@ function tangeqution() {
         document.getElementById("centererp").innerHTML += " Equation \\space = \\space \\ ( \\space a \\space + \\space g) \\space  x  + \\space ( \\space b \\space + \\space f ) \\space  y   \\space + ( \\space  ga \\space + fy \\space  + c \\space ) \\newline \\] ";
 
         
-        document.getElementById("centerrrp").innerHTML += " \\[  "+ one + "x \\space + (" +  two + ") y \\space +("+three + ") \\space = \\space 0 \\newline \\] ";
+        document.getElementById("centerrrp").innerHTML = " \\[  "+ one + "x \\space + (" +  two + ") y \\space +("+three + ") \\space = \\space 0 \\newline \\] ";
        
 
     
@@ -7103,14 +7103,40 @@ function chordeqution() {
         
         document.getElementById("centerrrp").innerHTML += " \\[  "+ one + "x \\space + (" +  two + ") y \\space +("+three + ") \\space = \\space 0 \\newline \\] ";
        
+        renderMathInElement(document.getElementById("centererp"));
+        renderMathInElement(document.getElementById("centerrrp"));
+    
+}
+    
+function radeq() {
+    var a, b, c, d, e, f;
+    var g1 = parseInt(document.getElementById("acenterrpr1").value);
+    var f1 = parseInt(document.getElementById("bcenterrpr1").value);
+    var c1 = parseInt(document.getElementById("ccenterrpr1").value);   
+    var g2 = parseInt(document.getElementById("acenterrpr2").value);
+    var f2 = parseInt(document.getElementById("bcenterrpr2").value);
+    var c2 = parseInt(document.getElementById("ccenterrpr2").value);
+    
+    var x  = g/2;
+    var y = f/2;
+
+    var one = g1-g2;
+    var two = f1-f2;
+    var three = c1-c2;
+
+    
+        document.getElementById("centererpr").innerHTML = "\\[Radial  \\space Axis  \\space of  \\space circles \\space = \\space A \\space - \\space B  \\newline \\] ";
+        
+        
+        document.getElementById("centerrrpr").innerHTML = " \\[  "+ one + "x \\space + (" +  two + ") y \\space +("+three + ") \\space = \\space 0 \\newline \\] ";
+       
 
     
 
-    renderMathInElement(document.getElementById("centererp"));
-    renderMathInElement(document.getElementById("centerrrp"));
+    renderMathInElement(document.getElementById("centererpr"));
+    renderMathInElement(document.getElementById("centerrrpr"));
 
 }
-
 // number of diagonals in n sided convex polygon
 function nodiagnolfind() {
     var n = parseInt(document.getElementById('nodiagnol').value);
@@ -15609,13 +15635,34 @@ function htfind() {
     }
     renderMathInElement(document.getElementById("htans"));
 }
-
+//to calculate the factorial
+function gamma_fact(num)
+{ var f=1;
+    for(var i=1;i<=num;i++)
+    {f=(f*i);
+    }
+    return f;
+}
 // gamma find function
 function gammafind() {
     // function to find gamma function of any no.
     let inpu = document.getElementById("gammain").value
-    let ans = math.gamma(inpu)
-    document.getElementById("gammafindans").innerHTML = "The gamma is " + ans
+    if(inpu=="")
+    {document.getElementById("gammafindans").innerHTML="Please enter a number"}
+    else{
+    num1=parseInt(inpu)
+    var num2=num1-1;
+    var num3=gamma_fact(num2);
+    let ans = math.gamma(num1)
+    var gamma ="";
+     gamma +="\\[\\Gamma \\left( x \\right)=\\space \\int_{0}^{\\infty} t^{x-1}e^{-t} dt\\]"
+     gamma +="\\[\\Gamma \\left( "+num1+" \\right) =("+num1+"-1)!\\]"
+     gamma +="\\["+num2+"!\\]"
+     gamma +="\\["+num3.toFixed(4)+"\\]"
+     gamma +="\\[The \\space result \\space is: "+ans.toFixed(4)+"\\]"
+    document.getElementById("gammafindans").innerHTML = gamma;
+    renderMathInElement(document.getElementById("gammafindans"))
+    }
 }
 
 function calcexgolds1find() {
@@ -16485,6 +16532,7 @@ function typenum15find() {
     renderMathInElement(result);
 }
 
+  
 
 
 
@@ -17480,7 +17528,7 @@ function lance_cal(){
     let z = parseInt(document.getElementById("lance_z").value);
 
     var area = z * ( u - y ) / 2 - x * ( z - y/2 );
-    var peri = 2z * arccos ( 1 - y / ( 2 * z ) ) + y;
+    var peri = 2*z * arccos ( 1 - y / ( 2 * z ) ) + y;
     document.getElementById("lance_res").innerHTML = "Area : "+ area+" and perimeter : "+peri;
 }
 function arccos(degrees) {
@@ -20605,11 +20653,17 @@ function multBinDecHexOct() {
 
     var x1;
     var x2;
-
+    let flag = 0;
     if (firstBase === "Binary") {
         x1 = calculatefrac(input1, 2);
-        print += "<h5>Step1 : Convert the " + firstBase + " number in Input 1 to decimal</h5>";
-        print += input1 + "->" + x1 + "<br>";
+        if(/[^0-1]/g.test(input1)){
+            print += "<h5>Step1 : Convert the " + firstBase + " number in Input 1 to decimal</h5>";
+            print += input1 + "->" + x1 + "<br>";
+        }
+        else{
+            print = "Enter the valid input";
+            flag = 1;
+        }
     } else if (firstBase === "Octal") {
         x1 = calculatefrac(input1, 8);
         print += "<h5>Step1 : Convert the " + firstBase + " number in Input 1 to decimal</h5>";
@@ -20625,9 +20679,15 @@ function multBinDecHexOct() {
     }
 
     if (secondBase === "Binary") {
-        x2 = calculatefrac(input2, 2);
-        print += "<h5>Step2 : Convert the " + secondBase + " number in Input 2 to decimal</h5>";
-        print += input2 + "->" + x2 + "<br>";
+        if(/[^0-1]/g.test(input2)){
+            x2 = calculatefrac(input2, 2);
+            print += "<h5>Step2 : Convert the " + secondBase + " number in Input 2 to decimal</h5>";
+            print += input2 + "->" + x2 + "<br>";
+        }
+        else{
+            print = "Enter the valid input";
+            flag = 1;
+        }
     } else if (secondBase === "Octal") {
         x2 = calculatefrac(input2, 8);
         print += "<h5>Step2 : Convert the " + secondBase + " number in Input 2 to decimal</h5>";
@@ -20646,22 +20706,25 @@ function multBinDecHexOct() {
     print += "<h5>Step3 : Now multiply the decimal values found in STEP1 and STEP2</h5>";
     print += x1 + "&nbsp; X &nbsp;" + x2 + "&nbsp; = &nbsp;" + x3;
 
-    if (resultType === "Binary") {
-        result.innerHTML = "Answer in binary=" + parseInt(fracDectoBinHexOct(x3, 2));
-        print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
-        print += x3 + "->" + parseInt(fracDectoBinHexOct(x3, 2));
-    } else if (resultType === "Octal") {
-        result.innerHTML = "Answer in Octal=" + fracDectoBinHexOct(x3, 8);
-        print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
-        print += x3 + "->" + fracDectoBinHexOct(x3, 8);
-    } else if (resultType === "Hexa Decimal") {
-        result.innerHTML = "Answer in Hexa Decimal=" + fracDectoBinHexOct(x3, 16);
-        print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
-        print += x3 + "->" + fracDectoBinHexOct(x3, 16);
-    } else if (resultType === "Decimal") {
-        result.innerHTML = "Answer in Decimal=" + fracDectoBinHexOct(x3, 10);
-        print += "<h5>Step4 : Answer in " + resultType + "</h5>";
-        print += x3.toString();
+    if(flag === '0'){
+
+        if (resultType === "Binary") {
+            result.innerHTML = "Answer in binary=" + parseInt(fracDectoBinHexOct(x3, 2));
+            print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
+            print += x3 + "->" + parseInt(fracDectoBinHexOct(x3, 2));
+        } else if (resultType === "Octal") {
+            result.innerHTML = "Answer in Octal=" + fracDectoBinHexOct(x3, 8);
+            print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
+            print += x3 + "->" + fracDectoBinHexOct(x3, 8);
+        } else if (resultType === "Hexa Decimal") {
+            result.innerHTML = "Answer in Hexa Decimal=" + fracDectoBinHexOct(x3, 16);
+            print += "<h5>Step4 : To find the result in " + resultType + " convert the answer found in STEP3 to " + resultType + "</h5>";
+            print += x3 + "->" + fracDectoBinHexOct(x3, 16);
+        } else if (resultType === "Decimal") {
+            result.innerHTML = "Answer in Decimal=" + fracDectoBinHexOct(x3, 10);
+            print += "<h5>Step4 : Answer in " + resultType + "</h5>";
+            print += x3.toString();
+        }
     }
     work.innerHTML = print;
 }
@@ -24809,32 +24872,6 @@ function shepvalue() {
         ans += "\\[\\mu_1 \\space and \\space \\mu_3 \\space i.e. \\space " + num3 + " \\space require \\space no \\space correction.\\]"
         document.getElementById("shepans").innerHTML = ans;
         renderMathInElement(document.getElementById("shepans"));
-
-        if (num == "" || num1 == "" || num3 == "" || h == "") {
-            document.getElementById("shepans").innerHTML = "Please fill all the fields";
-        }
-        else {
-            num = parseFloat(num);
-            num1 = parseFloat(num1);
-            h = parseFloat(h);
-            var h2 = Math.pow(h, 2);
-            var h4 = Math.pow(h, 4);
-            var ans = "";
-            ans = "\\[The \\space corrected \\space value \\space of \\space moments \\space are:\\]"
-            ans += "\\[\\mu_2 \\space (corrected)= \\mu_2 -\\frac{h^{2}}{12}\\]"
-            ans += "\\[" + num + " -\\frac{" + h + "^{2}}{12}\\]"
-            ans += "\\[" + num + " -\\frac{" + h2.toFixed(4) + "}{12}\\]"
-            ans += "\\[" + num + " -" + ((h2.toFixed(4)) / 12).toFixed(4) + "\\]"
-            ans += "\\[" + (num - ((h2.toFixed(4)) / 12).toFixed(4)).toFixed(4) + "\\]"
-            ans += "\\[\\mu_4 \\space (corrected)= \\mu_4 -\\frac{h^{4} \\mu_2}{2} + \\frac{7 h^{4}}{240}\\]"
-            ans += "\\[" + num1 + " -\\frac{" + h + "^{2} \\times " + num + "}{2} + \\frac{7 \\times " + h + "^{4}}{240}\\]"
-            ans += "\\[" + num1 + " -\\frac{" + (h2 * num).toFixed(4) + "}{2} + \\frac{" + (7 * h4).toFixed(4) + "}{240}\\]"
-            ans += "\\[" + num1 + " -" + (h2 * num).toFixed(4) / 2 + " + " + (7 * h4).toFixed(4) / 240 + "\\]"
-            ans += "\\[" + (num1 - (h2 * num).toFixed(4) / 2 + (7 * h4).toFixed(4) / 240).toFixed(4) + "\\]"
-            ans += "\\[\\mu_1 \\space and \\space \\mu_3 \\space i.e. \\space " + num3 + " \\space require \\space no \\space correction.\\]"
-            document.getElementById("shepans").innerHTML = ans;
-            renderMathInElement(document.getElementById("shepans"));
-        }
 
     }
 }

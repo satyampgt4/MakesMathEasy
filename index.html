@@ -7025,7 +7025,34 @@
                 <h1 id = "centererp"></h1>
                 <h1 id = "centerrrp"></h1> 
 
-               
+                <h3 style="text-align: center;">Circle and a point</h3><br>
+            <form action="">
+                <div class="coll">
+                    <p>
+                        <p>\[Equation \space of \space Circle \space A: \space  \space  \space  \space \]</p> <p>\[x^2 \space + \space \]</p>  <p>\[y^2 \space + \space \]</p> <input type="text" id="acenterrpr1" size=3 value='' placeholder="g">  <p>\[x \space + \space \]</p>  +
+                    <input type="text" id="bcenterrpr1" size=3 value='' placeholder="h"> <p>\[y \space + \space \]</p> + <input type="text" id="ccenterrpr1" size=3 value='' placeholder="C">  <p>\[\space = \space 0 \newline \]</p>
+                        <br><br>
+                    </p >
+                </div><br>
+                <div class="coll">
+                    <p>
+                        <p>\[Equation \space of \space Circle \space B : \space  \space  \space  \space \]</p> <p>\[x^2 \space + \space \]</p>  <p>\[y^2 \space + \space \]</p> <input type="text" id="acenterrpr2" size=3 value='' placeholder="g">  <p>\[x \space + \space \]</p>  +
+                    <input type="text" id="bcenterrpr2" size=3 value='' placeholder="h"> <p>\[y \space + \space \]</p> + <input type="text" id="ccenterrpr2" size=3 value='' placeholder="C">  <p>\[\space = \space 0 \newline \]</p>
+                        <br><br>
+                    </p >
+                </div><br><br><br>
+                <button type="button" class="btn btn-light" onclick=radeq()>
+                    Radial axis
+                </button>
+                
+                <button type="button" class="btn btn-light" onclick="this.form.reset();">
+                    Reset
+                   </button><br><br><br>
+                </form>
+            
+                <h1 id = "centererpr"></h1>
+                <h1 id = "centerrrpr"></h1> 
+
    
         </div>
         <div class="collapse" id="vecalg">
@@ -9516,8 +9543,9 @@
             <form action="">
                 <input type="number" id="gammain" class="form__field" placeholder="Enter Number for gamma function">
                 <br>
-                <button type="button" onclick ="gammafind()">Find</button>
-                <button type="button" onclick ="this.form.reset();">Reset</button>
+                <br>
+                <button class = "btn btn-light" type="button" onclick ="gammafind()">Find</button>&nbsp;
+                <button class = "btn btn-light" type="button" onclick ="this.form.reset();">Reset</button>
                 <br>
             </form>
             <div class="form-group text-center">
@@ -9529,7 +9557,7 @@
             <h2 style="text-align: center;">Beta Calculator</h2>
             <br><br>
             <form action="">
-                <input type="text" id="betain1" class="form__field" placeholder="Enter Number 1 for beta function">
+                <input type="text" id="betain1" class="form__field" placeholder="Enter Number 1 for beta function">&nbsp;
                 <input type="text" id="betain2" class="form__field" placeholder="Enter Number 2 for beta function">
                 <br>
                 <br>
